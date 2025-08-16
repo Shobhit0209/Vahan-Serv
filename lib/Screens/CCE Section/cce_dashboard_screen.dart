@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -55,6 +56,7 @@ class _CCEDashboardScreenState extends State<CCEDashboardScreen> {
   Timer? _restrictionTimer;
   Timer? _uiUpdateTimer;
   late int numberOfTimesToggled;
+  DateTime? _lastPressed;
 
   bool isLoading = false;
 
@@ -370,151 +372,166 @@ class _CCEDashboardScreenState extends State<CCEDashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final bool isDarkMode =
-    //     Provider.of<ThemeProvider>(context, listen: false).themeMode ==
-    //         ThemeMode.dark;
+    return PopScope(
+      canPop: false, // Prevents the default pop behavior
+      onPopInvoked: (bool didPop) {
+        if (didPop) {
+          return;
+        }
 
-    return Scaffold(
-      backgroundColor: white,
-      key: _scaffoldKey,
-      drawer: ClipRRect(
-        borderRadius: BorderRadius.circular(0),
-        child: _buildDrawer(context),
-      ),
-      appBar: AppBar(
-        titleSpacing: 0,
-        elevation: 4,
-        backgroundColor: blue,
-        leading: IconButton(
-            icon: Icon(
-              Icons.menu,
-              color: Colors.white,
-              size: 24,
-            ),
-            onPressed: () => _scaffoldKey.currentState?.openDrawer()),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            RichText(
-                text: TextSpan(
-                    text: '${AppLocalizations.of(context)!.welcome} CCE ',
-                    style: fh20boldWhite,
-                    children: [
-                  TextSpan(
-                      text: widget.cceName.split(' ').first.toUpperCase(),
-                      style: fh20boldGreen)
-                ])),
-          ],
+        final now = DateTime.now();
+        final backPressGap = now.difference(_lastPressed ?? now);
+        _lastPressed = now;
+
+        if (backPressGap >= const Duration(seconds: 2)) {
+          Fluttertoast.showToast(msg: 'Press back again to exit');
+        } else {
+          // Exit the app
+          SystemNavigator.pop();
+        }
+      },
+      child: Scaffold(
+        backgroundColor: white,
+        key: _scaffoldKey,
+        drawer: ClipRRect(
+          borderRadius: BorderRadius.circular(0),
+          child: _buildDrawer(context),
         ),
-        actions: _buildAction(context),
-        actionsPadding: pad12,
-      ),
-      body: RefreshIndicator(
-        color: blue,
-        backgroundColor: cardColorLightBlue,
-        onRefresh: () async {
-          await Provider.of<CCEProvider>(context, listen: false)
-              .initCCE(widget.cceId);
-        },
-        child: Consumer<CCEProvider>(
-          builder: (context, provider, child) {
-            if (kDebugMode) {
-              print(
-                  'Consumer builder called: isLoading: ${provider.isLoading}, error: ${provider.error}, currentCCE: ${provider.currentCCE?.name}');
-            }
-
-            if (provider.error != null) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Error: ${provider.error}',
-                      style: fh14mediumBlack,
-                    ),
-                    SizedBox(height: 16),
-                    ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll<Color>(blue)),
-                      onPressed: () {
-                        provider.clearError();
-                        provider.initCCE(widget.cceId);
-                      },
-                      child: Text(
-                        'Retry',
-                        style: fh14mediumWhite,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }
-            if (provider.isLoading) {
-              return Center(
-                  child: Lottie.asset(
-                'assets/cce/second animation.json',
-                height: 60,
-                width: 60,
-              ));
-            }
-            if (provider.currentCCE == null) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    LottieBuilder.asset(
-                      'assets/cce/second animation.json',
-                      height: 60,
-                      width: 60,
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Loading..',
-                      style: fh14regularBlue,
-                    )
-                  ],
-                ),
-              );
-            }
-
-            return SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              child: Padding(
-                padding: pad8,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(child: buildTimeRestrictionIndicator()),
-                    _buildDateSelector(),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    provider.assignedCustomers.isNotEmpty
-                        ? _buildDailyTasksList(provider)
-                        : Center(
-                            heightFactor: 6,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.people_outline_sharp,
-                                  size: 40,
-                                  color: blue,
-                                ),
-                                SizedBox(height: 10),
-                                Text('No Customers Lined Up',
-                                    style: fh14regularGrey),
-                              ],
-                            ),
-                          )
-                    //_buildMissedTasksList(provider),
-                    //_buildReferralCard(provider),
-                  ],
-                ),
+        appBar: AppBar(
+          titleSpacing: 0,
+          elevation: 4,
+          backgroundColor: blue,
+          leading: IconButton(
+              icon: Icon(
+                Icons.menu,
+                color: Colors.white,
+                size: 24,
               ),
-            );
+              onPressed: () => _scaffoldKey.currentState?.openDrawer()),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              RichText(
+                  text: TextSpan(
+                      text: '${AppLocalizations.of(context)!.welcome} CCE ',
+                      style: fh20boldWhite,
+                      children: [
+                    TextSpan(
+                        text: widget.cceName.split(' ').first.toUpperCase(),
+                        style: fh20boldGreen)
+                  ])),
+            ],
+          ),
+          actions: _buildAction(context),
+          actionsPadding: pad12,
+        ),
+        body: RefreshIndicator(
+          color: blue,
+          backgroundColor: cardColorLightBlue,
+          onRefresh: () async {
+            await Provider.of<CCEProvider>(context, listen: false)
+                .initCCE(widget.cceId);
           },
+          child: Consumer<CCEProvider>(
+            builder: (context, provider, child) {
+              if (kDebugMode) {
+                print(
+                    'Consumer builder called: isLoading: ${provider.isLoading}, error: ${provider.error}, currentCCE: ${provider.currentCCE?.name}');
+              }
+
+              if (provider.error != null) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Error: ${provider.error}',
+                        style: fh14mediumBlack,
+                      ),
+                      SizedBox(height: 16),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStatePropertyAll<Color>(blue)),
+                        onPressed: () {
+                          provider.clearError();
+                          provider.initCCE(widget.cceId);
+                        },
+                        child: Text(
+                          'Retry',
+                          style: fh14mediumWhite,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+              if (provider.isLoading) {
+                return Center(
+                    child: Lottie.asset(
+                  'assets/cce/second animation.json',
+                  height: 60,
+                  width: 60,
+                ));
+              }
+              if (provider.currentCCE == null) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      LottieBuilder.asset(
+                        'assets/cce/second animation.json',
+                        height: 60,
+                        width: 60,
+                      ),
+                      SizedBox(height: 16),
+                      Text(
+                        'Loading..',
+                        style: fh14regularBlue,
+                      )
+                    ],
+                  ),
+                );
+              }
+
+              return SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Padding(
+                  padding: pad8,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(child: buildTimeRestrictionIndicator()),
+                      _buildDateSelector(),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      provider.assignedCustomers.isNotEmpty
+                          ? _buildDailyTasksList(provider)
+                          : Center(
+                              heightFactor: 6,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.people_outline_sharp,
+                                    size: 40,
+                                    color: blue,
+                                  ),
+                                  SizedBox(height: 10),
+                                  Text('No Customers Lined Up',
+                                      style: fh14regularGrey),
+                                ],
+                              ),
+                            )
+                      //_buildMissedTasksList(provider),
+                      //_buildReferralCard(provider),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
