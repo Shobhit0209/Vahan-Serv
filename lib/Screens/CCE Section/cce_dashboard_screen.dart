@@ -24,8 +24,8 @@ import 'package:vahanserv/Screens/CCE%20Section/camera_screen.dart';
 import 'package:vahanserv/Screens/CCE%20Section/customer_profile_screen.dart';
 import 'package:vahanserv/Services/cce_auth_service.dart';
 import 'package:vahanserv/Services/notification_services.dart';
+import 'package:vahanserv/l10n/app_localizations.dart';
 //import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CCEDashboardScreen extends StatefulWidget {
   final String cceId;

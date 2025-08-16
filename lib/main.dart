@@ -5,7 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show DeviceOrientation, SystemChrome;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+//import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +17,7 @@ import 'package:vahanserv/Providers/language_provider.dart';
 import 'package:vahanserv/Providers/notification_provider.dart';
 import 'package:vahanserv/Routes/routes.dart';
 import 'package:vahanserv/Services/notification_services.dart';
+import 'package:vahanserv/l10n/app_localizations.dart';
 import 'firebase_options.dart';
 
 NotificationServices notificationServices = NotificationServices();

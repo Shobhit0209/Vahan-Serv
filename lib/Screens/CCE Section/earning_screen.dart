@@ -15,7 +15,7 @@ import 'package:vahanserv/Providers/cce_provider.dart';
 import 'package:vahanserv/Screens/CCE%20Section/earning_history_detailed_screen.dart';
 import 'package:vahanserv/Screens/nav_bar.dart';
 import 'package:vahanserv/Widgets/app_bar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:vahanserv/l10n/app_localizations.dart';
 
 class EarningScreen extends StatefulWidget {
   const EarningScreen({

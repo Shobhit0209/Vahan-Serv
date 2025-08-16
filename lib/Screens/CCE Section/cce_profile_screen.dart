@@ -25,7 +25,7 @@ import 'package:vahanserv/Screens/CCE%20Section/manage_customers_screen.dart';
 import 'package:vahanserv/Screens/nav_bar.dart';
 import 'package:vahanserv/Services/image_deletion_service.dart';
 import 'package:vahanserv/Widgets/app_bar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:vahanserv/l10n/app_localizations.dart';
 
 class CCEProfileScreen extends StatefulWidget {
   const CCEProfileScreen({

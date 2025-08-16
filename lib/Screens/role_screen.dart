@@ -5,7 +5,8 @@ import 'package:vahanserv/Constants/constants.dart';
 import 'package:vahanserv/Widgets/app_bar.dart';
 import 'package:vahanserv/Widgets/button.dart';
 import 'package:vahanserv/Widgets/role_card.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:vahanserv/l10n/app_localizations.dart';
+//import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RoleScreen extends StatefulWidget {
   const RoleScreen({super.key});

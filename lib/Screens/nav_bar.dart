@@ -7,7 +7,6 @@ import 'package:vahanserv/Screens/CCE%20Section/cce_dashboard_screen.dart';
 import 'package:vahanserv/Screens/CCE%20Section/cce_profile_screen.dart';
 import 'package:vahanserv/Screens/CCE%20Section/earning_screen.dart';
 import 'package:vahanserv/Screens/CCE%20Section/notification_screen.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final GlobalKey<NavBarScreenState> navBarKey = GlobalKey<NavBarScreenState>();
 

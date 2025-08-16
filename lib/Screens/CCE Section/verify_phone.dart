@@ -7,7 +7,7 @@ import 'package:vahanserv/Constants/constants.dart';
 import 'package:vahanserv/Providers/auth_provider.dart';
 import 'package:vahanserv/Widgets/app_bar.dart';
 import 'package:vahanserv/Widgets/button.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:vahanserv/l10n/app_localizations.dart';
 
 class VerifyPhone extends StatefulWidget {
   const VerifyPhone({super.key});

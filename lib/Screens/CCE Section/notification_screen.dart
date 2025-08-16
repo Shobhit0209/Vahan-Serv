@@ -8,7 +8,7 @@ import 'package:vahanserv/Providers/cce_provider.dart';
 import 'package:vahanserv/Providers/notification_provider.dart';
 import 'package:vahanserv/Screens/CCE%20Section/customer_profile_screen.dart';
 import 'package:vahanserv/Widgets/notification_tile.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:vahanserv/l10n/app_localizations.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key, required this.cceId});

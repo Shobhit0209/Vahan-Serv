@@ -13,7 +13,7 @@ import 'package:vahanserv/Providers/cce_provider.dart';
 import 'package:vahanserv/Providers/language_provider.dart';
 import 'package:vahanserv/Services/firestore_services.dart';
 import 'package:vahanserv/Widgets/button.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:vahanserv/l10n/app_localizations.dart';
 
 class FlagScreen extends StatefulWidget {
   const FlagScreen({
