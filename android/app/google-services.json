@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "781682431136",
+    "firebase_url": "https://vahan-serv-default-rtdb.firebaseio.com",
+    "project_id": "vahan-serv",
+    "storage_bucket": "vahan-serv.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781682431136:android:377b12a84811ae543da5c5",
+        "android_client_info": {
+          "package_name": "in.vahanserv.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781682431136-81193ut3229246l1s6qvp8rtii8giith.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.vahanserv.app",
+            "certificate_hash": "05d6013e6d23a4b1c386ac6ae4e7cfa0bdde352a"
+          }
+        },
+        {
+          "client_id": "781682431136-lsb0n6ef306l9117a8tc2b0dikn4127p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.vahanserv.app",
+            "certificate_hash": "34493ac0bfcc7c1d68e5207bc4c2af43487cb860"
+          }
+        },
+        {
+          "client_id": "781682431136-0l2lus0h6h1ts5f2rkagakkrsnkvsbtk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRKkfE2fQSZvqrLYmkabZj_vWcZzsWPN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781682431136-0l2lus0h6h1ts5f2rkagakkrsnkvsbtk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

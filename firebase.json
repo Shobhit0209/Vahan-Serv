@@ -1,0 +1,42 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "vahan-serv",
+          "appId": "1:781682431136:android:4e3d19cdc445edf63da5c5",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "vahan-serv",
+          "configurations": {
+            "android": "1:781682431136:android:4e3d19cdc445edf63da5c5",
+            "ios": "1:781682431136:ios:f01ebe15690aca4c3da5c5",
+            "macos": "1:781682431136:ios:f01ebe15690aca4c3da5c5",
+            "web": "1:781682431136:web:d9e902c9de70632d3da5c5"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "runtime": "nodejs18",
+      "codebase": "default"
+    },
+    {
+      "source": "C:/Projects/VahanServ/vahanservapp/functions",
+      "codebase": "scheduled-tasks",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ]
+    }
+  ]
+}
