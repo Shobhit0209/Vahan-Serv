@@ -351,7 +351,7 @@ class _CCEDashboardScreenState extends State<CCEDashboardScreen> {
       // Close loading dialog
       Navigator.of(context).pop();
 
-      context.go('/role');
+      context.go('/cce');
 
       // Show success message
       Fluttertoast.showToast(
@@ -376,18 +376,21 @@ class _CCEDashboardScreenState extends State<CCEDashboardScreen> {
       canPop: false, // Prevents the default pop behavior
       onPopInvoked: (bool didPop) {
         if (didPop) {
+          // This case is for when a pop is cancelled, so we can ignore it.
           return;
         }
-
         final now = DateTime.now();
-        final backPressGap = now.difference(_lastPressed ?? now);
-        _lastPressed = now;
-
-        if (backPressGap >= const Duration(seconds: 2)) {
-          Fluttertoast.showToast(msg: 'Press back again to exit');
-        } else {
-          // Exit the app
+        final timeDifference = now.difference(_lastPressed ?? now);
+        if (timeDifference.inSeconds <= 2) {
           SystemNavigator.pop();
+        } else {
+          _lastPressed = now;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Press back again to exit'),
+              duration: Duration(seconds: 2),
+            ),
+          );
         }
       },
       child: Scaffold(

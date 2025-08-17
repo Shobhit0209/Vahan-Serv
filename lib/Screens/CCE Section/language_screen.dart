@@ -104,13 +104,14 @@ class _LanguageScreenState extends State<LanguageScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+
                 Spacer(), // Add some spacing
                 selectedLanguage == null
                     ? const SizedBox.shrink()
                     : Button(
                         title: AppLocalizations.of(context)!.proceed,
-                        onTapped: () => context.go('/role'))
+                        onTapped: () => context.go('/cce')),
+                SizedBox(height: 20),
               ],
             ),
           );

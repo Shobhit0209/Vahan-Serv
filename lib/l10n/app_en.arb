@@ -71,5 +71,6 @@
     "masact":"Mark as Active",
     "cannotmarkactive":"Cannot Mark Active",
     "markactivein":"You can mark yourself active again in",
-    "active":"Active"
+    "active":"Active",
+    "accountdeletionalert": "By proceeding, you understand that your VahanServ CCE account will be permanently deleted. This includes, your account profile and personal information, your complete service and other history, any saved car details or photos."
 }

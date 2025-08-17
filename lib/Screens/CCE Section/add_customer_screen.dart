@@ -51,20 +51,8 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
 
   void _addCustomer() async {
     if (_formKey.currentState!.validate()) {
-      String generateCustomerId(String name, String mobile) {
-        String first4 =
-            name.trim().split(" ").join().substring(0, 4).toUpperCase();
-        String last4 = mobile.trim().substring(mobile.length - 4);
-        return "$first4$last4";
-      }
-
-      final String custId = generateCustomerId(
-        _nameController.text,
-        _mobileController.text,
-      );
-
       final customer = Customer(
-          custId: custId,
+          custId: _mobileController.text.trim(),
           custName: _nameController.text.trim(),
           custAddress: _addressController.text.trim(),
           custMobile: _mobileController.text.trim(),

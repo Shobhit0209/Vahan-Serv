@@ -3,8 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+import 'package:provider/provider.dart';
 import 'package:vahanserv/Constants/constants.dart';
-import 'package:vahanserv/Screens/role_screen.dart';
+import 'package:vahanserv/Providers/auth_provider.dart';
+import 'package:vahanserv/Screens/CCE%20Section/find_me_screen.dart';
+import 'package:vahanserv/l10n/app_localizations.dart';
 
 class AccountDeletionScreen extends StatelessWidget {
   const AccountDeletionScreen({super.key, required this.cceId});
@@ -12,6 +15,7 @@ class AccountDeletionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authprovider = Provider.of<AuthProvidar>(context, listen: false);
     return Scaffold(
       backgroundColor: white,
       appBar: AppBar(
@@ -37,16 +41,16 @@ class AccountDeletionScreen extends StatelessWidget {
             spacing: 8,
             children: [
               Text(
-                'By proceeding, you understand that your VahanServ CCE account will be permanently deleted. This includes, your account profile and personal information, your complete service and other history, any saved car details or photos.',
+                AppLocalizations.of(context)!.accountdeletionalert,
                 style: fh12mediumBlack,
                 textAlign: TextAlign.justify,
               ),
               InkWell(
                 borderRadius: br10,
                 onTap: () async {
-                  _deleteAccount();
+                  _deleteAccount(authprovider);
                   PersistentNavBarNavigator.pushNewScreen(context,
-                      screen: RoleScreen(), withNavBar: false);
+                      screen: FindMeScreen(), withNavBar: false);
                 },
                 child: ClipRRect(
                   borderRadius: br10,
@@ -78,11 +82,10 @@ class AccountDeletionScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _deleteAccount() async {
+  Future<void> _deleteAccount(AuthProvidar provider) async {
     try {
       // Get the currently logged in user
-      User? user = FirebaseAuth.instance.currentUser;
-
+      final user = provider.currentUser;
       if (user != null) {
         await user.delete();
         await deleteFirestoreData(cceId);

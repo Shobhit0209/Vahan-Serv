@@ -177,7 +177,8 @@ class _OtpScreenState extends State<OtpScreen> {
                           title: AppLocalizations.of(context)!.login,
                           onTapped: () {
                             _verifyOtp();
-                          })
+                          }),
+              SizedBox(height: 20),
             ],
           ),
         ),

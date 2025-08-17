@@ -68,7 +68,7 @@ class _FindMeScreenState extends State<FindMeScreen> {
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
         if (!didPop) {
-          context.go('/role');
+          context.go('/lang');
         }
       },
       child: Scaffold(
@@ -77,7 +77,7 @@ class _FindMeScreenState extends State<FindMeScreen> {
         appBar: AppBarWidget(
           title: AppLocalizations.of(context)!.findme,
           index: 0,
-          onTapLeading: () => context.go('/role'),
+          onTapLeading: () => context.go('/lang'),
         ),
         body: Padding(
           padding: pad8,
@@ -169,7 +169,8 @@ class _FindMeScreenState extends State<FindMeScreen> {
                       ? () {
                           context.go('/verifyPhone');
                         }
-                      : () {})
+                      : () {}),
+              SizedBox(height: 20),
             ],
           ),
         ),

@@ -55,7 +55,7 @@ class _CCEProfileScreenState extends State<CCEProfileScreen> {
       // Close loading dialog
       Navigator.of(context).pop();
 
-      context.go('/role');
+      context.go('/cce');
 
       // Show success message
       Fluttertoast.showToast(

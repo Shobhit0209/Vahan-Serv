@@ -117,7 +117,8 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                       ? SizedBox.shrink()
                       : Button(
                           title: AppLocalizations.of(context)!.getotp,
-                          onTapped: getOtp)
+                          onTapped: getOtp),
+              SizedBox(height: 20),
             ],
           ),
         ),

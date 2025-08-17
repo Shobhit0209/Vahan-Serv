@@ -223,4 +223,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get active => 'सक्रिय';
+
+  @override
+  String get accountdeletionalert => 'आप समझते हैं कि आपका VahanServ CCE खाता स्थायी रूप से हटा दिया जाएगा। इसमें, आपका खाता प्रोफ़ाइल और व्यक्तिगत जानकारी, आपकी पूरी सेवा और अन्य इतिहास, कोई भी सहेजी गई कार विवरण या फ़ोटो शामिल हैं।';
 }

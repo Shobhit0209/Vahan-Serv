@@ -526,6 +526,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Active'**
   String get active;
+
+  /// No description provided for @accountdeletionalert.
+  ///
+  /// In en, this message translates to:
+  /// **'By proceeding, you understand that your VahanServ CCE account will be permanently deleted. This includes, your account profile and personal information, your complete service and other history, any saved car details or photos.'**
+  String get accountdeletionalert;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
